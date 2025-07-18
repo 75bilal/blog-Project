@@ -14,16 +14,15 @@ router.get("/check-auth", authCheck, (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  console.log("REQ BODY: ", req.body);
 
   const { name, email, bio, password } = req.body;
-
   try {
     if (!email && !name) {
       return res
         .status(401)
         .json({ scuess: false, message: "please send name and email" });
     }
+    
     const newUser = await User.create({ email, name, bio, password });
     res.status(201).json({ success: true, message: "User created" });
   } catch (error) {
