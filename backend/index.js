@@ -7,8 +7,8 @@ const cors =require('cors');
 const cookieParser = require('cookie-parser');
 
 
-const userroute =require('./routers/userpost.route')
-const userRegroute = require('./routers/user.route');
+const postroute =require('./routers/userpost.route')
+const userRroute = require('./routers/user.route');
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
@@ -35,8 +35,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/blogProject', {
 
 
 
-app.use('/api' , userroute);
-app.use('/api',userRegroute)
+app.use('/api' , postroute);
+app.use('/api/user',userRroute)
 
 app.listen(PORT , () =>{
     console.log('server start at port ' , PORT);

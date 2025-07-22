@@ -26,7 +26,7 @@ const Input = () => {
    }
  }
 
-
+const [open, setOpen] = useState(false);
 
 
 
@@ -60,7 +60,7 @@ console.log("Media type:", media?.type);
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       {/* Trigger: Wrap user input as clickable trigger */}
       <DialogTrigger asChild>
         <div className="w-full max-w-xl bg-[#1f1f1f] p-4 rounded-lg hover:bg-[#2a2a2a] border border-gray-600 shadow-lg cursor-pointer">
@@ -89,29 +89,37 @@ console.log("Media type:", media?.type);
         />
         {mediaPreview && (  
           <div className='mt-4'>
-
-          {media?.type?.startsWith('image') ? <img src={mediaPreview} alt="" className='w-full max-h-64 object-cover rounded-md' /> :  <video src={mediaPreview} className='w-full max-h-64 rounded-md'/>}
+            {media?.type?.startsWith('image') ? (
+              <img src={mediaPreview} alt="" className='w-full max-h-64 object-cover rounded-md' />
+            ) : (
+              <video src={mediaPreview} className='w-full max-h-64 rounded-md'/>
+            )}
           </div>
         )}
         <div className='flex justify-between items-center mt-4'>
           <div className='flex gap-4 text-white text-xl'>
             <label>
-
-            <CiImageOn className="cursor-pointer"  />
-            <input type="file" accept='image/*' onChange={handleFileChange} hidden/>
-
+              <CiImageOn className="cursor-pointer"  />
+              <input type="file" accept='image/*' onChange={handleFileChange} hidden/>
             </label>
             <label>
-            <IoVideocamOutline className="cursor-pointer" />
-                        <input type="file" accept='video/*' onChange={handleFileChange} hidden/>
-
-
-
+              <IoVideocamOutline className="cursor-pointer" />
+              <input type="file" accept='video/*' onChange={handleFileChange} hidden/>
             </label>
           </div>
           <div className='flex items-center gap-3'>
-            <button className='rounded-md px-2 py-2 bg-[#1a1a1a] text-white border border-gray-600 hover:bg-[#2a2a2a] transition'>Cancel</button>
-            <button className='rounded-md py-2  px-4 bg-[#5b53f5] text-white hover:bg-[#6366f1] transition' onClick={submitHandler}>Post</button>
+            <button
+              className='rounded-md px-2 py-2 bg-[#1a1a1a] text-white border border-gray-600 hover:bg-[#2a2a2a] transition'
+              onClick={() => setOpen(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className='rounded-md py-2  px-4 bg-[#5b53f5] text-white hover:bg-[#6366f1] transition'
+              onClick={submitHandler}
+            >
+              Post
+            </button>
           </div>
         </div>
       </DialogContent>

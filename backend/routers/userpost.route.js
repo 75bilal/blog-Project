@@ -31,11 +31,12 @@ router.post(
     }
 
     try {
+      let cloudinaryResponse = null;
+      if(req.file) {
       const localFilePath = path.resolve(file.path); // ✅ convert to absolute path
       console.log("Resolved localFilePath:", localFilePath);
 
-      const cloudinaryResponse = await uploadOnCloudinary(localFilePath);
-
+      cloudinaryResponse = await uploadOnCloudinary(localFilePath);
       if (!cloudinaryResponse) {
         return res
           .status(500)
@@ -46,7 +47,7 @@ router.post(
       if (fs.existsSync(file.path)) {
         fs.unlinkSync(file.path);
       }
-
+    }
       const createPost = await Data.create({
         userId: req.user._id,
         text: text || "",

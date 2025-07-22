@@ -3,43 +3,15 @@ import { FaRegHeart, FaRegComment, FaShare } from "react-icons/fa";
 import { assets } from "../assets/assets"; // Replace with your avatar path
 import Input from "./Input";
 
-const Mainsection = () => {
-  const [post, setPost] = useState([]);
-
-  async function fetchPost() {
-    try {
-      const res = await fetch("http://localhost:3000/api/userpost", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // 🟢 Include cookies (auth)
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        setPost(data?.data || []); // ✅ ensure data is set correctly
-        console.log("Fetched Posts:", data);
-      } else {
-        console.log("Failed to access posts");
-      }
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchPost();
-  }, []);
+const Mainsection = ({posts}) => {
 
   return (
-    <div className="flex flex-col items-center pt-4">
-      {/* Input Box */}
-      <Input />
+    <>
+      <div className="flex flex-col items-center justify-center min-h-screen">
 
       {/* Posts List */}
-      {post.length > 0 ? (
-        post.map((item, index) => (
+      {posts.length > 0 ? (
+        posts.map((item, index) => (
           <div
             key={item._id || index}
             className="w-full max-w-lg p-4 border-b border-gray-700 pb-4 mb-4"
@@ -89,7 +61,8 @@ const Mainsection = () => {
       ) : (
         <p className="text-gray-400 mt-10">No posts found.</p>
       )}
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -17,7 +17,7 @@ const SignUpDialog = ( {open ,setOpen ,setlogin}) => {
        const OnSubmitHandler =async (e) =>{
          e.preventDefault();
           try {
-            const res = await fetch('http://localhost:3000/api/signup' ,{
+            const res = await fetch('http://localhost:3000/api/user/signup' ,{
                 method :"POST",
                 headers :{ 
                 "Content-Type":"application/json"
@@ -75,7 +75,7 @@ const SignUpDialog = ( {open ,setOpen ,setlogin}) => {
                   
                   />
                 
-                <button className='mt-2 w-full text-white rounded-md bg-[#5b53f5] hidden sm:block hover:bg-[#6366f1] px-2 py-1 font-semibold transition duration-300'>
+                <button className='mt-2 w-full text-white rounded-md bg-[#5b53f5]  hover:bg-[#6366f1] px-2 py-1 font-semibold transition duration-300'>
                   create account
                 </button>  
                   </form>

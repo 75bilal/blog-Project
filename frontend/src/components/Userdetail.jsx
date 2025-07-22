@@ -7,7 +7,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+
 import { assets } from '@/assets/assets'
+import { Link } from 'react-router-dom'
+
+
+
+// Userdetail.jsx
 const Userdetail = () => {
   return (
     <div>
@@ -19,7 +25,9 @@ const Userdetail = () => {
       <DropdownMenuContent className="bg-[#0e121e] text-gray-400 transition duration-300 absolute top-3 right-2">
         <DropdownMenuLabel> My Profile</DropdownMenuLabel>
         <DropdownMenuSeparator />
-    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem asChild>
+      <Link to="/profile">Profile</Link>
+    </DropdownMenuItem>
     <DropdownMenuItem>Billing</DropdownMenuItem>
     <DropdownMenuItem>Team</DropdownMenuItem>
     <DropdownMenuItem>Subscription</DropdownMenuItem>

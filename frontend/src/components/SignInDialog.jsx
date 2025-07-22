@@ -16,7 +16,7 @@ const SignInDialog = ({ open, setOpen, openSignUp, setLogin }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3000/api/login', {
+      const res = await fetch('http://localhost:3000/api/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,9 +26,11 @@ const SignInDialog = ({ open, setOpen, openSignUp, setLogin }) => {
       });
       
       const data = await res.json();
-      if (data.sccuess) {
+      console.log("Response Data:", data);
+      if (data.success) {
         setOpen(false);
         setLogin(true);
+        localStorage.setItem('token', data.token);
       } else {
         alert(data.message || data.error || "Login failed");
       }
@@ -39,7 +41,7 @@ const SignInDialog = ({ open, setOpen, openSignUp, setLogin }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className='text-white bg-[#232828] hover:bg-[#394141] border border-gray-700 rounded-md px-3 py-1 transition duration-300'>
+      <DialogTrigger className='text-white  bg-[#232828] hover:bg-[#394141] border border-gray-700 rounded-md px-3 py-1 transition duration-300'>
         Sign in
       </DialogTrigger>
 
@@ -75,7 +77,7 @@ const SignInDialog = ({ open, setOpen, openSignUp, setLogin }) => {
 
             <button
               type='submit'
-              className='mt-2 w-full text-white rounded-md bg-[#5b53f5] hidden sm:block hover:bg-[#6366f1] px-2 py-1 font-semibold transition duration-300'
+              className='mt-2 w-full text-white rounded-md bg-[#5b53f5]  hover:bg-[#6366f1] px-2 py-1 font-semibold transition duration-300'
             >
               {password ? 'Continue with email and password' : 'Continue with email only'}
             </button>
@@ -89,7 +91,7 @@ const SignInDialog = ({ open, setOpen, openSignUp, setLogin }) => {
             <button
               type='button'
               onClick={() => setShowPassword((prev) => !prev)}
-              className='mt-2 w-full text-white rounded-md bg-[#0e121e] hidden sm:block hover:bg-[#1b2031] px-2 py-1 font-semibold border border-gray-700 transition duration-300'
+              className='mt-2 w-full text-white rounded-md bg-[#0e121e]   hover:bg-[#1b2031] px-2 py-1 font-semibold border border-gray-700 transition duration-300'
             >
               {showPassword ? 'Sign in with email only' : 'Sign in with email and password'}
             </button>
