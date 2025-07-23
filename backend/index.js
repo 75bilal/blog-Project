@@ -21,22 +21,22 @@ app.use(cors({
 
 
 
-// ✅ Correct database connection
+
 mongoose.connect('mongodb://127.0.0.1:27017/blogProject', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
 .then(() => {
-    console.log('✅ Database connected successfully!');
+    console.log('Database connected successfully!');
 })
 .catch((err) => {
-    console.error('❌ Database connection failed:', err);
+    console.error('Database connection failed:', err);
 });
 
 
 
-app.use('/api' , postroute);
-app.use('/api/user',userRroute)
+app.use('/api', postroute);
+app.use('/api/user', userRroute);
 
 app.listen(PORT , () =>{
     console.log('server start at port ' , PORT);

@@ -1,6 +1,6 @@
 // middleware/auth.js
 const jwt = require('jsonwebtoken');
-const User = require('../models/user.model'); // ✅ FIX: correct path
+const User = require('../models/user.model'); 
 
 const authCheck = async (req, res, next) => {
   try {
@@ -10,7 +10,7 @@ const authCheck = async (req, res, next) => {
       req.user = null;
       return next();
     }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // ✅ FIX: add try/catch
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await User.findById(decoded.id).select("-password");
     //console.log("User from middleware:", user);
